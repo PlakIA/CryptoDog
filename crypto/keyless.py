@@ -19,18 +19,19 @@ class LetsHash:
         return hash_object.hexdigest()
 
 
+class EasterEgg(Exception):
+    pass
+
+
 class B64:
     @staticmethod
-    def encode(text: str) -> str:
+    def encode64(text: str) -> str:
         return base64.b64encode(text.encode()).decode()
 
     @staticmethod
-    def decode(text: str) -> str:
+    def decode64(text: str) -> str:
         if text == 'RGFzaGEgUGxha3NpbmE=':
-            return 'Easter Egg'
-        elif text == 'UGxha3NpbidzIERvZw==':
-            return 'Easter Dog'
-        try:
-            return base64.b64decode(text.encode()).decode()
-        except Exception:
-            return 'Decoding error'
+            raise EasterEgg
+        # elif text == 'UGxha3NpbidzIERvZw==':
+        #     return EasterDog
+        return base64.b64decode(text.encode()).decode()
