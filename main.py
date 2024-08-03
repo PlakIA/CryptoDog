@@ -4,11 +4,10 @@ import webbrowser
 import pyperclip
 from PyQt6.QtWidgets import QMainWindow, QApplication
 
+from forms import msgbox
 from forms.keyless import KeylessPage
 from forms.symmetric import SymmetricPage
 from interface import main
-
-from forms import msgbox
 
 
 class MainForm(QMainWindow, main.Ui_MainWindow):
@@ -28,7 +27,6 @@ class MainForm(QMainWindow, main.Ui_MainWindow):
         self.keyless_btn_copy.clicked.connect(lambda: pyperclip.copy(self.keyless_textEdit_output.toPlainText()))
 
         self.symmetric_page = SymmetricPage(self)
-        self.symmetric_comboBox_cipher.textActivated.connect(self.symmetric_page.combobox_update)
         self.symmetric_btn_encrypt.clicked.connect(self.symmetric_page.encrypt)
         self.symmetric_btn_decrypt.clicked.connect(self.symmetric_page.decrypt)
         self.symmetric_btn_copy.clicked.connect(lambda: pyperclip.copy(self.symmetric_textEdit_output.toPlainText()))

@@ -1,7 +1,8 @@
-from Crypto.Cipher import ARC4, AES, DES, DES3, Blowfish
+from base64 import b64encode, b64decode
+
+from Crypto.Cipher import AES, DES, Blowfish
 from Crypto.Random import get_random_bytes
 from Crypto.Util.Padding import pad, unpad
-from base64 import b64encode, b64decode
 
 
 class BlockCrypto:
@@ -11,7 +12,6 @@ class BlockCrypto:
             'AES192': {'obj': AES, 'key_size': 24},
             'AES256': {'obj': AES, 'key_size': 32},
             'DES': {'obj': DES, 'key_size': 8},
-            '3DES': {'obj': DES3, 'key_size': 24},
             'Blowfish': {'obj': Blowfish, 'key_size': 16}
         }
 
@@ -20,11 +20,7 @@ class BlockCrypto:
         self.mode = mode
 
     def encrypt(self, key: str, text: str) -> str:
-        if self.algo is DES3:
-            key = pad(key.encode(), self.key_size, style='x923')[:self.key_size]
-        else:
-            key = pad(key.encode(), self.key_size)[:self.key_size]
-
+        key = pad(key.encode(), self.key_size)[:self.key_size]
         plaintext = pad(text.encode(), self.algo.block_size)
 
         if self.mode == 'ECB':
@@ -38,11 +34,7 @@ class BlockCrypto:
         return b64encode(ciphertext).decode()
 
     def decrypt(self, key: str, crypted_text: str) -> str:
-        if self.algo is DES3:
-            key = pad(key.encode(), self.key_size, style='x923')[:self.key_size]
-        else:
-            key = pad(key.encode(), self.key_size)[:self.key_size]
-
+        key = pad(key.encode(), self.key_size)[:self.key_size]
         ciphertext = b64decode(crypted_text.encode())
 
         if self.mode == 'ECB':
@@ -54,17 +46,3 @@ class BlockCrypto:
             plaintext = cipher.decrypt(ciphertext[self.algo.block_size:])
 
         return unpad(plaintext, self.algo.block_size).decode()
-
-
-class RC4:
-    @staticmethod
-    def encrypt(key: str, text: str) -> str:
-        cipher = ARC4.new(key.encode())
-        ciphertext = cipher.encrypt(text.encode())
-        return b64encode(ciphertext).decode()
-
-    @staticmethod
-    def decrypt(key: str, crypted_text: str) -> str:
-        ciphertext = b64decode(crypted_text.encode())
-        cipher = ARC4.new(key.encode())
-        return cipher.decrypt(ciphertext).decode()
