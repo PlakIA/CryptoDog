@@ -1,4 +1,5 @@
 import sys
+import webbrowser
 
 import pyperclip
 from PyQt6.QtWidgets import QMainWindow, QApplication
@@ -15,6 +16,8 @@ class MainForm(QMainWindow, main.Ui_MainWindow):
         # with open('interface/resources/stylesheet.qss', 'r', encoding='utf8') as f:
         #     self.setStyleSheet(f.read())
 
+        self.actionGitHub_Page.triggered.connect(lambda: webbrowser.open('https://github.com/PlakIA/CryptoDog'))
+
         self.keyless_page = KeylessPage(self)
         self.keyless_comboBox.textActivated.connect(self.keyless_page.combobox_update)
         self.keyless_btn_encode.clicked.connect(self.keyless_page.encode_func)
@@ -26,6 +29,7 @@ class MainForm(QMainWindow, main.Ui_MainWindow):
         self.symmetric_btn_encrypt.clicked.connect(self.symmetric_page.encrypt)
         self.symmetric_btn_decrypt.clicked.connect(self.symmetric_page.decrypt)
         self.symmetric_btn_copy.clicked.connect(lambda: pyperclip.copy(self.symmetric_textEdit_output.toPlainText()))
+
 
 def except_hook(cls, exception, traceback):
     sys.__excepthook__(cls, exception, traceback)
