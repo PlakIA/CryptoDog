@@ -1,8 +1,8 @@
 from PyQt6.QtGui import QPixmap
+from PyQt6.QtWidgets import QMessageBox
 
 from crypto.keyless import LetsHash, B64, EasterEgg
 from forms import msgbox
-from PyQt6.QtWidgets import QMessageBox
 
 
 class KeylessPage:

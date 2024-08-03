@@ -121,6 +121,8 @@ class Ui_MainWindow(object):
         self.keyless_comboBox.addItem("")
         self.keyless_comboBox.addItem("")
         self.keyless_comboBox.addItem("")
+        self.keyless_comboBox.addItem("")
+        self.keyless_comboBox.addItem("")
         self.verticalLayout.addWidget(self.keyless_comboBox)
         self.keyless_btn_encode = QtWidgets.QPushButton(parent=self.verticalLayoutWidget)
         icon1 = QtGui.QIcon()
@@ -371,7 +373,7 @@ class Ui_MainWindow(object):
         self.menubar.addAction(self.menuHelp.menuAction())
 
         self.retranslateUi(MainWindow)
-        self.tabWidget.setCurrentIndex(2)
+        self.tabWidget.setCurrentIndex(1)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def retranslateUi(self, MainWindow):
@@ -393,6 +395,8 @@ class Ui_MainWindow(object):
         self.keyless_comboBox.setItemText(2, _translate("MainWindow", "SHA1"))
         self.keyless_comboBox.setItemText(3, _translate("MainWindow", "SHA256"))
         self.keyless_comboBox.setItemText(4, _translate("MainWindow", "SHA512"))
+        self.keyless_comboBox.setItemText(5, _translate("MainWindow", "BLAKE2s"))
+        self.keyless_comboBox.setItemText(6, _translate("MainWindow", "BLAKE2b"))
         self.keyless_btn_encode.setText(_translate("MainWindow", "Encode"))
         self.keyless_btn_decode.setText(_translate("MainWindow", "Decode"))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_keyless), _translate("MainWindow", "No Key"))
