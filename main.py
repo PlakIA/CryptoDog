@@ -8,6 +8,8 @@ from forms.keyless import KeylessPage
 from forms.symmetric import SymmetricPage
 from interface import main
 
+from forms import msgbox
+
 
 class MainForm(QMainWindow, main.Ui_MainWindow):
     def __init__(self):
@@ -17,6 +19,7 @@ class MainForm(QMainWindow, main.Ui_MainWindow):
         #     self.setStyleSheet(f.read())
 
         self.actionGitHub_Page.triggered.connect(lambda: webbrowser.open('https://github.com/PlakIA/CryptoDog'))
+        self.actionAbout.triggered.connect(lambda: msgbox.show_msg('About', 'CryptoDog\nv0.3-alpha'))
 
         self.keyless_page = KeylessPage(self)
         self.keyless_comboBox.textActivated.connect(self.keyless_page.combobox_update)
