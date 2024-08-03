@@ -20,7 +20,11 @@ class BlockCrypto:
         self.mode = mode
 
     def encrypt(self, key: str, text: str) -> str:
-        key = pad(key.encode(), self.key_size)[:self.key_size]
+        if self.algo is DES3:
+            key = pad(key.encode(), self.key_size, style='x923')[:self.key_size]
+        else:
+            key = pad(key.encode(), self.key_size)[:self.key_size]
+
         plaintext = pad(text.encode(), self.algo.block_size)
 
         if self.mode == 'ECB':
@@ -34,7 +38,11 @@ class BlockCrypto:
         return b64encode(ciphertext).decode()
 
     def decrypt(self, key: str, crypted_text: str) -> str:
-        key = pad(key.encode(), self.key_size)[:self.key_size]
+        if self.algo is DES3:
+            key = pad(key.encode(), self.key_size, style='x923')[:self.key_size]
+        else:
+            key = pad(key.encode(), self.key_size)[:self.key_size]
+
         ciphertext = b64decode(crypted_text.encode())
 
         if self.mode == 'ECB':
