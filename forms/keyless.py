@@ -32,15 +32,16 @@ class KeylessPage:
         self.clear_output()
         input_text = self.main_form.keyless_textEdit_input.toPlainText()
         if self.main_form.keyless_comboBox.currentText() == 'Base64':
-            self.main_form.keyless_textEdit_output.setPlainText(B64.encode64(input_text))
+            output_text = B64.encode64(input_text)
         else:
             hash_algo = self.main_form.keyless_comboBox.currentText().lower()
-            self.main_form.keyless_textEdit_output.setPlainText(LetsHash(hash_algo).hash(input_text))
+            output_text = LetsHash(hash_algo).hash(input_text)
+        self.main_form.keyless_textEdit_output.setPlainText(output_text)
 
     def decode_func(self):
+        self.clear_output()
+        input_text = self.main_form.keyless_textEdit_input.toPlainText()
         try:
-            self.clear_output()
-            input_text = self.main_form.keyless_textEdit_input.toPlainText()
             self.main_form.keyless_textEdit_output.setPlainText(B64.decode64(input_text))
         except EasterEgg:
             self.main_form.keyless_label_warn.setStyleSheet('font-size: 36pt; color: #d54653;')

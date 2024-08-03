@@ -4,6 +4,7 @@ import pyperclip
 from PyQt6.QtWidgets import QMainWindow, QApplication
 
 from forms.keyless import KeylessPage
+from forms.symmetric import SymmetricPage
 from interface import main
 
 
@@ -20,6 +21,11 @@ class MainForm(QMainWindow, main.Ui_MainWindow):
         self.keyless_btn_decode.clicked.connect(self.keyless_page.decode_func)
         self.keyless_btn_copy.clicked.connect(lambda: pyperclip.copy(self.keyless_textEdit_output.toPlainText()))
 
+        self.symmetric_page = SymmetricPage(self)
+        self.symmetric_comboBox_cipher.textActivated.connect(self.symmetric_page.combobox_update)
+        self.symmetric_btn_encrypt.clicked.connect(self.symmetric_page.encrypt)
+        self.symmetric_btn_decrypt.clicked.connect(self.symmetric_page.decrypt)
+        self.symmetric_btn_copy.clicked.connect(lambda: pyperclip.copy(self.symmetric_textEdit_output.toPlainText()))
 
 def except_hook(cls, exception, traceback):
     sys.__excepthook__(cls, exception, traceback)
