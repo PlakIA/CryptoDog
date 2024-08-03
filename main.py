@@ -5,7 +5,6 @@ from PyQt6.QtWidgets import QMainWindow, QApplication
 
 from forms.keyless import KeylessPage
 from interface import main
-from forms import msgbox
 
 
 class MainForm(QMainWindow, main.Ui_MainWindow):

@@ -33,5 +33,5 @@ class B64:
         if text == 'RGFzaGEgUGxha3NpbmE=':
             raise EasterEgg
         # elif text == 'UGxha3NpbidzIERvZw==':
-        #     return EasterDog
+        #     raise EasterDog
         return base64.b64decode(text.encode()).decode()
