@@ -7,16 +7,16 @@ from PyQt6.QtWidgets import QMainWindow, QApplication
 from forms import msgbox
 from forms.keyless import KeylessPage
 from forms.symmetric import SymmetricPage
-from interface import main
+from ui import main
 
-import interface.resources.resources
+import ui.resources.resources
 
 
 class MainForm(QMainWindow, main.Ui_MainWindow):
     def __init__(self):
         super().__init__()
         self.setupUi(self)
-        # with open('interface/resources/stylesheet.qss', 'r', encoding='utf8') as f:
+        # with open('ui/resources/stylesheet.qss', 'r', encoding='utf8') as f:
         #     self.setStyleSheet(f.read())
 
         self.actionGitHub_Page.triggered.connect(lambda: webbrowser.open('https://github.com/PlakIA/CryptoDog'))
