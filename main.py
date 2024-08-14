@@ -9,6 +9,8 @@ from forms.keyless import KeylessPage
 from forms.symmetric import SymmetricPage
 from interface import main
 
+import interface.resources.resources
+
 
 class MainForm(QMainWindow, main.Ui_MainWindow):
     def __init__(self):
