@@ -42,3 +42,16 @@ class GpgManager:
         if private:
             self.gpg.delete_keys(fingerprint, private, expect_passphrase=False)
         self.gpg.delete_keys(fingerprint)
+
+    def encrypt(self, fingerprint: str, data: str):
+        return self.gpg.encrypt(data, recipients=fingerprint, always_trust=True)
+
+    def encrypt_file(self, fingerprint: str, file_path: str, save_path: str):
+        return self.gpg.encrypt_file(file_path, output=save_path, recipients=fingerprint, always_trust=True)
+
+    def decrypt(self, data: str):
+        return self.gpg.decrypt(data, always_trust=True, extra_args=['--pinentry-mode', 'loopback'])
+
+    def decrypt_file(self, file_path: str, save_path: str):
+        return self.gpg.decrypt_file(file_path, output=save_path, always_trust=True,
+                                     extra_args=['--pinentry-mode', 'loopback'])

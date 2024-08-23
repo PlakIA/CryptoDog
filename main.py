@@ -20,7 +20,7 @@ class MainForm(QMainWindow, main.Ui_MainWindow):
         #     self.setStyleSheet(f.read())
 
         self.actionGitHub_Page.triggered.connect(lambda: webbrowser.open('https://github.com/PlakIA/CryptoDog'))
-        self.actionAbout.triggered.connect(lambda: msgbox.show_msg('About', 'CryptoDog\nv0.6.1-alpha'))
+        self.actionAbout.triggered.connect(lambda: msgbox.show_msg('About', 'CryptoDog\nv0.6.2-alpha'))
 
         self.keyless_page = KeylessPage(self)
         self.keyless_comboBox.textActivated.connect(self.keyless_page.combobox_update)
