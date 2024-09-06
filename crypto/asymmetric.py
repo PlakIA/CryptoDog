@@ -11,7 +11,7 @@ class GpgManager:
     def __init__(self):
         if not os.path.exists('gpghome'):
             os.mkdir('gpghome')
-        self.gpg = gnupg.GPG(gnupghome='gpghome')
+        self.gpg = gnupg.GPG(gnupghome='gpghome', verbose=True)
         self.gpg.encoding = 'utf-8'
 
     def list_keys(self, secret: bool = False):
@@ -43,15 +43,27 @@ class GpgManager:
             self.gpg.delete_keys(fingerprint, private, expect_passphrase=False)
         self.gpg.delete_keys(fingerprint)
 
-    def encrypt(self, fingerprint: str, data: str):
+    def encrypt(self, data: str, fingerprint: str):
         return self.gpg.encrypt(data, recipients=fingerprint, always_trust=True)
 
-    def encrypt_file(self, fingerprint: str, file_path: str, save_path: str):
+    def encrypt_file(self, file_path: str, save_path: str, fingerprint: str):
         return self.gpg.encrypt_file(file_path, output=save_path, recipients=fingerprint, always_trust=True)
 
     def decrypt(self, data: str):
-        return self.gpg.decrypt(data, always_trust=True, extra_args=['--pinentry-mode', 'loopback'])
+        return self.gpg.decrypt(data, always_trust=True)
 
     def decrypt_file(self, file_path: str, save_path: str):
         return self.gpg.decrypt_file(file_path, output=save_path, always_trust=True,
                                      extra_args=['--pinentry-mode', 'loopback'])
+
+    def sign(self, data: str, keyid: str):
+        return self.gpg.sign(data, keyid=keyid)
+
+    def sign_file(self, file_path: str, save_path: str, keyid: str):
+        return self.gpg.sign_file(file_path, output=save_path, keyid=keyid)
+
+    def verify(self, data: str):
+        return self.gpg.verify(data)
+
+    def verify_file(self, file_path: str):
+        return self.gpg.verify_file(file_path)
