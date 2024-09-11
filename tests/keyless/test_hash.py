@@ -18,3 +18,7 @@ def test_blake2b():
 
 def test_blake2s():
     assert LetsHash('blake2s').hash('Hello, Crypto!') == '4f5be857360a27cfa1a2285bed46caa5436d5efe2f8e97934661097dfe963cc5'
+
+def test_attribute_error():
+    with pytest.raises(AttributeError):
+        LetsHash('sha1').hash(123)

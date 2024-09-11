@@ -25,3 +25,8 @@ def test_encode(got, expected):
                           ('IA==', ' ')])
 def test_decode(got, expected):
     assert B64.decode64(got) == expected
+
+
+def test_attribute_error():
+    with pytest.raises(AttributeError):
+        B64.encode64(123)
