@@ -1,5 +1,5 @@
 import pytest
-from crypto.keyless import LetsHash
+from src.crypto.keyless import LetsHash
 
 def test_md5():
     assert LetsHash('md5').hash('Hello, Crypto!') == 'b46433b9878f2bcdc06ad1eeb350b0be'

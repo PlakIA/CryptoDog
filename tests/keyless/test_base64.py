@@ -1,6 +1,6 @@
 import pytest
 
-from crypto.keyless import B64
+from src.crypto.keyless import B64
 
 
 @pytest.mark.parametrize('got,expected',
